@@ -1,0 +1,55 @@
+type Attendee {
+    id: ID!
+    name: String
+}
+
+type Speaker {
+    id:ID!
+
+    name:String
+    twitter:String
+    talks: [Talk]
+}
+
+type Talk {
+    id:ID!
+
+    title:String
+    description:String
+    speakers: [Speaker]
+    speakersByTitle(title: String): [Speaker]
+}
+
+union All = Speaker | Talk
+
+type Query {
+    allTalks: [Talk]
+    allAttendees: [Attendee]
+    allSpeakers: [Speaker]
+    allOfAll: [All]
+#    pagedTalk(size: Int!): [Talk]
+}
+
+type Score {
+    title: String
+    score: Int
+}
+
+type Subscription {
+    scores(title: String) : Score
+}
+
+input SpeakerInput {
+    name:String
+    twitter:String
+}
+
+type Mutation {
+    addSpeakerSimple(name: String) : Speaker
+    addSpeakerObject(speakerInput: SpeakerInput) : Speaker
+}
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}

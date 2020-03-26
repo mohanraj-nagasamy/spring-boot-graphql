@@ -1,0 +1,17 @@
+#type Query {
+#    post(id: ID!): Post
+#}
+#type Post {
+#    id: ID!
+#    text: String
+#    comments: [Comment!]!
+#}
+#
+#type Mutation {
+#    createPost(text:String):Post
+#}
+#
+#type Comment {
+#    id: ID!
+#    description: String!
+#}
